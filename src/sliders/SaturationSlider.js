@@ -10,6 +10,7 @@ const SaturationSlider = ({
   value,
   color,
   disabled,
+  disabledThumbTintColor,
   onValueChange,
   onSlidingComplete,
   gradientSteps
@@ -24,7 +25,11 @@ const SaturationSlider = ({
       maximumValue={1}
       value={value}
       disabled={disabled}
-      thumbTintColor={tinycolor({ ...color, s: value }).toHslString()}
+      thumbTintColor={
+        disabled && disabledThumbTintColor
+          ? disabledThumbTintColor
+          : tinycolor({ ...color, s: value }).toHslString()
+      }
       onValueChange={onValueChange}
       onSlidingComplete={onSlidingComplete}
     />
@@ -36,6 +41,7 @@ export default SaturationSlider;
 SaturationSlider.propTypes = {
   value: PropTypes.number.isRequired,
   disabled: PropTypes.bool,
+  disabledThumbTintColor: PropTypes.string,
   color: PropTypes.shape({
     h: PropTypes.number.isRequired,
     s: PropTypes.number.isRequired,
@@ -48,5 +54,6 @@ SaturationSlider.propTypes = {
 
 SaturationSlider.defaultProps = {
   disabled: false,
+  disabledThumbTintColor: null,
   onSlidingComplete: () => {}
 };

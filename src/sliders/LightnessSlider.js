@@ -10,6 +10,7 @@ const LightnessSlider = ({
   value,
   color,
   disabled,
+  disabledThumbTintColor,
   onValueChange,
   onSlidingComplete,
   gradientSteps
@@ -24,7 +25,11 @@ const LightnessSlider = ({
       maximumValue={1}
       value={value}
       disabled={disabled}
-      thumbTintColor={tinycolor({ ...color, l: value }).toHslString()}
+      thumbTintColor={
+        disabled && disabledThumbTintColor
+          ? disabledThumbTintColor
+          : tinycolor({ ...color, l: value }).toHslString()
+      }
       onValueChange={onValueChange}
       onSlidingComplete={onSlidingComplete}
     />
@@ -36,6 +41,7 @@ export default LightnessSlider;
 LightnessSlider.propTypes = {
   value: PropTypes.number.isRequired,
   disabled: PropTypes.bool,
+  disabledThumbTintColor: PropTypes.string,
   color: PropTypes.shape({
     h: PropTypes.number.isRequired,
     s: PropTypes.number.isRequired,
@@ -48,5 +54,6 @@ LightnessSlider.propTypes = {
 
 LightnessSlider.defaultProps = {
   disabled: false,
+  disabledThumbTintColor: null,
   onSlidingComplete: () => {}
 };

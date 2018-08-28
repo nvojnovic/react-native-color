@@ -9,6 +9,7 @@ const HueSlider = ({
   style,
   value,
   disabled,
+  disabledThumbTintColor,
   onValueChange,
   onSlidingComplete,
   gradientSteps
@@ -21,7 +22,11 @@ const HueSlider = ({
       maximumValue={359}
       value={value}
       disabled={disabled}
-      thumbTintColor={tinycolor({ s: 1, l: 0.5, h: value }).toHslString()}
+      thumbTintColor={
+        disabled && disabledThumbTintColor
+          ? disabledThumbTintColor
+          : tinycolor({ s: 1, l: 0.5, h: value }).toHslString()
+      }
       onValueChange={onValueChange}
       onSlidingComplete={onSlidingComplete}
     />
@@ -33,6 +38,7 @@ export default HueSlider;
 HueSlider.propTypes = {
   value: PropTypes.number.isRequired,
   disabled: PropTypes.bool,
+  disabledThumbTintColor: PropTypes.string,
   onValueChange: PropTypes.func.isRequired,
   onSlidingComplete: PropTypes.func,
   gradientSteps: PropTypes.number.isRequired
@@ -40,5 +46,6 @@ HueSlider.propTypes = {
 
 HueSlider.defaultProps = {
   disabled: false,
+  disabledThumbTintColor: null,
   onSlidingComplete: () => {}
 };
