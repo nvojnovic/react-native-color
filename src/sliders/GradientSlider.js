@@ -8,9 +8,11 @@ const GradientSlider = ({
   style,
   value,
   step,
+  disabled,
   maximumValue,
   gradient,
   onValueChange,
+  onSlidingComplete,
   thumbTintColor
 }) => {
   return (
@@ -19,11 +21,13 @@ const GradientSlider = ({
       <Slider
         value={value}
         step={step}
+        disabled={disabled}
         animateTransitions
         animationType="spring"
         thumbTouchSize={{ width: 48, height: 48 }}
         maximumValue={maximumValue}
         onValueChange={onValueChange}
+        onSlidingComplete={onSlidingComplete}
         minimumTrackTintColor="transparent"
         maximumTrackTintColor="transparent"
         thumbStyle={[styles.thumb, { backgroundColor: thumbTintColor }]}
@@ -61,7 +65,14 @@ const styles = StyleSheet.create({
 GradientSlider.propTypes = {
   value: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
+  disabled: PropTypes.bool,
   maximumValue: PropTypes.number.isRequired,
   onValueChange: PropTypes.func.isRequired,
+  onSlidingComplete: PropTypes.func,
   thumbTintColor: PropTypes.string.isRequired
+};
+
+GradientSlider.defaultProps = {
+  disabled: false,
+  onSlidingComplete: () => {}
 };
