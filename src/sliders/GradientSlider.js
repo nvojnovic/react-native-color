@@ -9,6 +9,7 @@ const GradientSlider = ({
   value,
   step,
   disabled,
+  minimumValue,
   maximumValue,
   gradient,
   onValueChange,
@@ -25,6 +26,7 @@ const GradientSlider = ({
         animateTransitions
         animationType="spring"
         thumbTouchSize={{ width: 48, height: 48 }}
+        minimumValue={minimumValue}
         maximumValue={maximumValue}
         onValueChange={onValueChange}
         onSlidingComplete={onSlidingComplete}
@@ -66,6 +68,7 @@ GradientSlider.propTypes = {
   value: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired,
   disabled: PropTypes.bool,
+  minimumValue: PropTypes.number,
   maximumValue: PropTypes.number.isRequired,
   onValueChange: PropTypes.func.isRequired,
   onSlidingComplete: PropTypes.func,
@@ -74,5 +77,6 @@ GradientSlider.propTypes = {
 
 GradientSlider.defaultProps = {
   disabled: false,
+  minimumValue: 0,
   onSlidingComplete: () => {}
 };
